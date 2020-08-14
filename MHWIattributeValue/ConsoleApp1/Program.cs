@@ -12,16 +12,16 @@ namespace ConsoleApp1
                 cal = AVcalS(bulletM, out bulletA, 0, ref con);
                 Rcal = RedAVcal(bulletM, out bulletA, 0, ref con);
                 TRcal = TRedAVcal(bulletM, out bulletA, 0, ref con);
-                Acal = AccelAVcal(bulletM, out bulletA, ref con);
-                TAcal = TAccelAVcal(bulletM, out bulletA, ref con);
+                Acal = AccelAVcal(bulletM, out bulletA,0, ref con);
+                TAcal = TAccelAVcal(bulletM, out bulletA,0, ref con);
             } else {
                 int ravM = ReadAV();
                 int ravA = ravM;
                 cal = AVcalS(ravM, out ravA, 1, ref con);
                 Rcal = RedAVcal(ravM, out ravA, 1, ref con);
                 TRcal = TRedAVcal(ravM, out ravA, 1, ref con);
-                Acal = AccelAVcal(ravM, out ravA, ref con);
-                TAcal = TAccelAVcal(ravM, out ravA, ref con);
+                Acal = AccelAVcal(ravM, out ravA,1, ref con);
+                TAcal = TAccelAVcal(ravM, out ravA,1, ref con);
             }
         }
 
@@ -99,92 +99,140 @@ namespace ConsoleApp1
             }
             avcD = Math.Round(avcD, MidpointRounding.AwayFromZero);
             avc = (int)avcD;
-            count++;
+            count = 0;
             Console.WriteLine(avc  +" "+ avcA +" "+ a +" "+ count +" "+ avcD);
+            Print(avc, avcA, count);
             return avc;
         }
         static int RedAVcal(int Ravc, out int RavcA, int b, ref int count) {
             double avcD = Ravc;
             RavcA = Ravc;
+            count = 80;
             if (b == 1) {
                 if (Ravc <= 120) {
                     avcD += 150;
                 } else {
                     avcD = avcD * 2.2;
                 }
-                RavcA += 80;
+                RavcA += count;
             } else {
                 avcD = avcD * 1.8;
-                RavcA += 80;
+                RavcA += count;
             }
             avcD = Math.Round(avcD, MidpointRounding.AwayFromZero);
             Ravc = (int)avcD;
-            count++;
             Console.WriteLine(Ravc + " " + RavcA + " " + b + " " + count + " " + avcD);
+            Print(Ravc, RavcA, count);
             return Ravc;
         }
         static int TRedAVcal(int TRavc, out int TRavcA, int c, ref int count) {
             double avcD = TRavc;
             TRavcA = TRavc;
+            count = 150;
             if (c == 1) {
                 if (TRavc <= 90) {
                     avcD += 150;
                 } else {
                     avcD = avcD * 2.55;
                 }
-                TRavcA += 150;
+                TRavcA += count;
             }
             else {
                 avcD = avcD * 2.35;
-                TRavcA += 150;
+                TRavcA += count;
             }
             avcD = Math.Round(avcD, MidpointRounding.AwayFromZero);
             TRavc = (int)avcD;
-            count++;
             Console.WriteLine(TRavc + " " + TRavcA + " " + c + " " + count + " " + avcD);
+            Print(TRavc, TRavcA, count);
             return TRavc;
         }
-        static int AccelAVcal(int Aavc, out int AavcA, ref int count) {
+        static int AccelAVcal(int Aavc, out int AavcA,int d, ref int count) {
             double avcD = Aavc;
             AavcA = Aavc;
-            AavcA += 60;
+            count = 60;
+            if (d == 1){
+                if (Aavc <= 250){
+                    avcD += 150;
+                }else{
+                    avcD = avcD * 1.6;
+                }
+            }else{
+                avcD = avcD * 1.6;
+            }
             avcD = Math.Round(avcD, MidpointRounding.AwayFromZero);
             Aavc = (int)avcD;
-            count++;
             Console.WriteLine(Aavc + " " + AavcA + " " + count + " " + avcD);
+            Print(Aavc, AavcA, count);
             return Aavc;
         }
-        static int TAccelAVcal(int TAavc, out int TAavcA, ref int count) {
+        static int TAccelAVcal(int TAavc, out int TAavcA,int e, ref int count) {
             double avcD = TAavc;
             TAavcA = TAavc;
-            TAavcA += 150;
+            count = 150;
+            if (e == 1){
+                if (TAavc <= 250){
+                    avcD += 150;
+                }else{
+                    avcD = avcD * 1.6;
+                }
+            }else{
+                avcD = avcD * 1.6;
+            }
             avcD = Math.Round(avcD, MidpointRounding.AwayFromZero);
             TAavc = (int)avcD;
-            count++;
             Console.WriteLine(TAavc + " " + TAavcA + " " + count + " " + avcD);
+            Print(TAavc, TAavcA, count);
             return TAavc;
         }
         static int AVcal(in int AVmax, int AVC, in int con) {
-            switch (con) {
-                case 0:
-                    while (AVC <= AVmax) {
-                    }
-                    break;
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-                default:
-                    break;
+            int cunt = 0;
+            double avcD = AVC;
+            avcD = Math.Round(avcD, MidpointRounding.AwayFromZero);
+            Console.WriteLine("Debug" + AVmax + ":" + AVC + ":" + con + ":"+ cunt);
+            while ((int)avcD <= AVmax){
+                switch (cunt) {
+                    case 0:
+                        avcD = AVC + 0;
+                        break;
+                    case 1:
+                        avcD = AVC + 30;
+                        break;
+                    case 2:
+                        avcD = AVC + 60;
+                        break;
+                    case 3:
+                        avcD = AVC + 100;
+                        break;
+                    case 4:
+                        AVC = (int)avcD;
+                        avcD = (int)AVC * 1.05 + 100;
+                        break;
+                    case 5:
+                        AVC = (int)avcD;
+                        avcD = (int)AVC * 1.1 + 100;
+                        break;
+                    case 6:
+                        AVC = (int)avcD;
+                        avcD = (int)AVC * 1.2 + 100;
+                        break;
+                    default:
+                        Console.WriteLine("ERROR");
+                        break;
+                }
+                cunt++;
+                Console.WriteLine("Debug" + AVmax + ":" + AVC + ":" + con + ":" + cunt);
             }
-            return AVC;
+        return cunt;
         }
         static void Print(in int AVmax,in int AVC,in int con){
-
+            int x = AVcal(AVmax, AVC, con);
+            Console.WriteLine("属性最大値:" + AVmax );
+            if (x <= 6){
+                Console.WriteLine("属性強化は" + x + "Lvで上限を超えます" + "\n");
+            }else{
+                Console.WriteLine("属性強化6Lv積んでも上限値は超えません" + "\n");
+            }
         }
     }
 }
