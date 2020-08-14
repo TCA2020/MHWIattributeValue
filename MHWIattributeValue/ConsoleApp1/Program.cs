@@ -164,7 +164,23 @@ namespace ConsoleApp1
             Console.WriteLine(TAavc + " " + TAavcA + " " + count + " " + avcD);
             return TAavc;
         }
-        static int AVcal(in int AVmax,int AVC,in int con){
+        static int AVcal(in int AVmax, int AVC, in int con) {
+            switch (con) {
+                case 0:
+                    while (AVC <= AVmax) {
+                    }
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                default:
+                    break;
+            }
             return AVC;
         }
         static void Print(in int AVmax,in int AVC,in int con){
