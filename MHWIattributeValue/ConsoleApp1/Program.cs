@@ -189,8 +189,8 @@ namespace ConsoleApp1
             int cunt = 0;
             double avcD = AVC;
             avcD = Math.Round(avcD, MidpointRounding.AwayFromZero);
-            Console.WriteLine("Debug" + AVmax + ":" + AVC + ":" + con + ":"+ cunt);
-            while ((int)avcD <= AVmax){
+            //Console.WriteLine("Debug" + AVmax + ":" + AVC + ":" + con + ":"+ cunt);
+            while ((int)avcD <= AVmax || cunt == 7){
                 switch (cunt) {
                     case 0:
                         avcD = AVC + 0;
@@ -216,12 +216,15 @@ namespace ConsoleApp1
                         AVC = (int)avcD;
                         avcD = (int)AVC * 1.2 + 100;
                         break;
+                    case 7:
+                        avcD = AVmax + 1;
+                        break;
                     default:
                         Console.WriteLine("ERROR");
                         break;
                 }
                 cunt++;
-                Console.WriteLine("Debug" + AVmax + ":" + AVC + ":" + con + ":" + cunt);
+                //Console.WriteLine("Debug" + AVmax + ":" + AVC + ":" + con + ":" + cunt);
             }
         return cunt;
         }
