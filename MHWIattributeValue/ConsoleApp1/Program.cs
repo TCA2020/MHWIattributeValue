@@ -6,8 +6,8 @@ namespace ConsoleApp1
     {
         static void Main(string[] args) {
             int cal, Rcal, Acal, TRcal, TAcal, con = 0;
-            if (typejud()) {
-                int bulletM = dragonbullte();
+            if (typejudge()) {
+                int bulletM = bulltetype();
                 int bulletA = bulletM;
                 cal = AVcalS(bulletM, out bulletA, 0, ref con);
                 Rcal = RedAVcal(bulletM, out bulletA, 0, ref con);
@@ -25,10 +25,10 @@ namespace ConsoleApp1
             }
         }
 
-        static bool typejud() {
+        static bool typejudge() {
             string wtype;
             int type = 0, tf = 0;
-            bool a = true;
+            bool judge = true;
             Console.WriteLine("武器はボウガンですか？ボウガンならば1をそれ以外ならば1以外の数字を入力してください");
             while (tf == 0) {
                 wtype = (Console.ReadLine());
@@ -40,17 +40,19 @@ namespace ConsoleApp1
                     Console.WriteLine("数値を入力してください。");
                 }
                 if (type == 1) {
-                    a = true;
+                    judge = true;
                 } else {
-                    a = false;
+                   judge = false;
                 }
             }
-            return a;
+            return judge;
         }
-        static int dragonbullte() {
+        //武器種判定（ボウガンorそれ以外）
+
+        static int bulltetype() {
             string btype;
             int type = 0, tf = 0, bt = 0;
-            Console.WriteLine("弾種類が滅榴弾ならば1をそれ以外ならば1以外の数字を入力してください");
+            Console.WriteLine("弾種類が滅龍弾ならば1をそれ以外ならば1以外の数字を入力してください");
             while (tf == 0)
             {
                 btype = (Console.ReadLine());
@@ -69,6 +71,7 @@ namespace ConsoleApp1
             }
             return bt;
         }
+        //ボウガンの場合（滅龍弾かそれ以外かを判定する）
         static int ReadAV() {
             string AtVl;
             int av = 0, tf = 0;
@@ -85,6 +88,8 @@ namespace ConsoleApp1
             }
             return av;
         }
+        //ボウガン以外の場合（属性値を入力させる）
+
         static int AVcalS(int avc, out int avcA, int a, ref int count) {
             double avcD = avc;
             avcA = avc;
@@ -104,6 +109,8 @@ namespace ConsoleApp1
             Print(avc, avcA, count);
             return avc;
         }
+        //属性値の最大値を計算して出力する（無補正）
+
         static int RedAVcal(int Ravc, out int RavcA, int b, ref int count) {
             double avcD = Ravc;
             RavcA = Ravc;
@@ -119,12 +126,15 @@ namespace ConsoleApp1
                 avcD = avcD * 1.8;
                 RavcA += count;
             }
-            avcD = Math.Round(avcD, MidpointRounding.AwayFromZero);
+
             Ravc = (int)avcD;
             Console.WriteLine(Ravc + " " + RavcA + " " + b + " " + count + " " + avcD);
             Print(Ravc, RavcA, count);
             return Ravc;
         }
+
+        //属性値の最大値を計算して出力する（龍脈覚醒）
+
         static int TRedAVcal(int TRavc, out int TRavcA, int c, ref int count) {
             double avcD = TRavc;
             TRavcA = TRavc;
@@ -147,6 +157,8 @@ namespace ConsoleApp1
             Print(TRavc, TRavcA, count);
             return TRavc;
         }
+        //属性値の最大値を計算して出力する（真・龍脈覚醒)
+
         static int AccelAVcal(int Aavc, out int AavcA,int d, ref int count) {
             double avcD = Aavc;
             AavcA = Aavc;
@@ -166,6 +178,8 @@ namespace ConsoleApp1
             Print(Aavc, AavcA, count);
             return Aavc;
         }
+        //属性値の最大値を計算して出力する（属性加速）
+
         static int TAccelAVcal(int TAavc, out int TAavcA,int e, ref int count) {
             double avcD = TAavc;
             TAavcA = TAavc;
@@ -185,6 +199,9 @@ namespace ConsoleApp1
             Print(TAavc, TAavcA, count);
             return TAavc;
         }
+
+        //属性値の最大値を計算して出力する（真・属性加速）
+
         static int AVcal(in int AVmax, int AVC, in int con) {
             int cunt = 0;
             double avcD = AVC;
@@ -228,6 +245,8 @@ namespace ConsoleApp1
             }
         return cunt;
         }
+        //属性値upスキルをどこまで積んだら上限突破するかの計算
+
         static void Print(in int AVmax,in int AVC,in int con){
             int x = AVcal(AVmax, AVC, con);
             Console.WriteLine("属性最大値:" + AVmax );
@@ -237,5 +256,6 @@ namespace ConsoleApp1
                 Console.WriteLine("属性強化6Lv積んでも上限値は超えません" + "\n");
             }
         }
+        //属性値upスキルをどこまで積んだら上限突破するかの判定・出力
     }
 }
