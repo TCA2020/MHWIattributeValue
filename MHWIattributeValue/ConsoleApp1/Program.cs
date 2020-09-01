@@ -34,7 +34,7 @@ namespace ConsoleApp1
                 wtype = (Console.ReadLine());
                 bool parseOK = int.TryParse(wtype, out type);
                 if (parseOK) {
-                    Console.WriteLine("パース成功:" + parseOK + type);
+                    //Console.WriteLine("パース成功:" + parseOK + type);
                     tf = 1;
                 } else {
                     Console.WriteLine("数値を入力してください。");
@@ -58,7 +58,7 @@ namespace ConsoleApp1
                 btype = (Console.ReadLine());
                 bool parseOK = int.TryParse(btype, out type);
                 if (parseOK) {
-                    Console.WriteLine("パース成功:" + parseOK + type);
+                    //Console.WriteLine("パース成功:" + parseOK + type);
                     tf = 1;
                 } else {
                     Console.WriteLine("数値を入力してください。");
@@ -80,7 +80,7 @@ namespace ConsoleApp1
                 AtVl = (Console.ReadLine());
                 bool parseOK = int.TryParse(AtVl, out av);
                 if (parseOK) {
-                    Console.WriteLine("パース成功:" + parseOK + av);
+                    //Console.WriteLine("パース成功:" + parseOK + av);
                     tf = 1;
                 } else {
                     Console.WriteLine("数値を入力してください。");
@@ -105,8 +105,9 @@ namespace ConsoleApp1
             avcD = Math.Round(avcD, MidpointRounding.AwayFromZero);
             avc = (int)avcD;
             count = 0;
-            Console.WriteLine(avc  +" "+ avcA +" "+ a +" "+ count +" "+ avcD);
-            Print(avc, avcA, count);
+            Console.WriteLine("シリーズスキル無し");
+            Console.WriteLine(avcA +" "+ count);
+            Print(avc,avcA);
             return avc;
         }
         //属性値の最大値を計算して出力する（無補正）
@@ -126,10 +127,11 @@ namespace ConsoleApp1
                 avcD = avcD * 1.8;
                 RavcA += count;
             }
-
+            avcD = Math.Round(avcD, MidpointRounding.AwayFromZero);
             Ravc = (int)avcD;
-            Console.WriteLine(Ravc + " " + RavcA + " " + b + " " + count + " " + avcD);
-            Print(Ravc, RavcA, count);
+            Console.WriteLine("龍脈覚醒");
+            Console.WriteLine(RavcA + " " + count);
+            Print(Ravc, RavcA);
             return Ravc;
         }
 
@@ -153,8 +155,9 @@ namespace ConsoleApp1
             }
             avcD = Math.Round(avcD, MidpointRounding.AwayFromZero);
             TRavc = (int)avcD;
-            Console.WriteLine(TRavc + " " + TRavcA + " " + c + " " + count + " " + avcD);
-            Print(TRavc, TRavcA, count);
+            Console.WriteLine("真・龍脈覚醒");
+            Console.WriteLine(TRavcA + " " + count);
+            Print(TRavc,TRavcA);
             return TRavc;
         }
         //属性値の最大値を計算して出力する（真・龍脈覚醒)
@@ -174,8 +177,9 @@ namespace ConsoleApp1
             }
             avcD = Math.Round(avcD, MidpointRounding.AwayFromZero);
             Aavc = (int)avcD;
-            Console.WriteLine(Aavc + " " + AavcA + " " + count + " " + avcD);
-            Print(Aavc, AavcA, count);
+            Console.WriteLine("属性加速");
+            Console.WriteLine(AavcA + " " + count);
+            Print(Aavc, AavcA);
             return Aavc;
         }
         //属性値の最大値を計算して出力する（属性加速）
@@ -195,14 +199,15 @@ namespace ConsoleApp1
             }
             avcD = Math.Round(avcD, MidpointRounding.AwayFromZero);
             TAavc = (int)avcD;
-            Console.WriteLine(TAavc + " " + TAavcA + " " + count + " " + avcD);
-            Print(TAavc, TAavcA, count);
+            Console.WriteLine("真・属性加速");
+            Console.WriteLine(TAavcA + " " + count);
+            Print(TAavc,TAavcA);
             return TAavc;
         }
 
         //属性値の最大値を計算して出力する（真・属性加速）
 
-        static int AVcal(in int AVmax, int AVC, in int con) {
+        static int AVcal(int AVmax,int AVC) {
             int cunt = 0;
             double avcD = AVC;
             avcD = Math.Round(avcD, MidpointRounding.AwayFromZero);
@@ -247,9 +252,9 @@ namespace ConsoleApp1
         }
         //属性値upスキルをどこまで積んだら上限突破するかの計算
 
-        static void Print(in int AVmax,in int AVC,in int con){
-            int x = AVcal(AVmax, AVC, con);
-            Console.WriteLine("属性最大値:" + AVmax );
+        static void Print(int AVmax,int AVC){
+            int x = AVcal(AVmax, AVC);
+            Console.WriteLine("属性上限値:" + AVmax );
             if (x <= 6){
                 Console.WriteLine("属性強化は" + x + "Lvで上限を超えます" + "\n");
             }else{
